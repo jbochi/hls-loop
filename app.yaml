@@ -1,0 +1,30 @@
+application: hls-loop
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+- url: /favicon\.ico
+  static_files: favicon.ico
+  upload: favicon\.ico
+
+- url: /variant\.m3u8
+  static_files: variant.m3u8
+  upload: variant\.m3u8
+  mime_type: application/vnd.apple.mpegurl
+
+- url: /crossdomain\.xml
+  static_files: crossdomain.xml
+  upload: crossdomain\.xml
+  mime_type: text/xml
+
+- url: /static
+  static_dir: static
+
+- url: .*
+  script: main.app
+
+libraries:
+- name: webapp2
+  version: "2.5.2"
