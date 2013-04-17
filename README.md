@@ -11,5 +11,5 @@ Run:
 
 The resources are:
 
-Variant playlist: http://localhost:5000/variant.m3u8
-Playlists: http://localhost:5000/playlist[1-4].m3u8
+* Variant playlist: http://localhost:5000/variant.m3u8
+* Playlists: http://localhost:5000/playlist[1-4].m3u8
