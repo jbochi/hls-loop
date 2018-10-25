@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://vjs.zencdn.net/7.2.3/video-js.css" rel="stylesheet">
+    <title>hls-python - Test</title>
+  </head>
+  <body id="index">
+    <video id="mevideo" class="video-js" controls preload="auto" width="640px" height="480px">
+      <source src="http://localhost:5000/variant.m3u8" type="application/x-mpegURL">
+        <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a web browser that
+        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+        </p>
+    </video>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/7.2.4/alt/video.core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-hls/5.14.1/videojs-contrib-hls.js"></script>
+    <script>
+      var player = videojs('mevideo');
+      player.play();
+    </script>
+  </body>
+</html>
+
