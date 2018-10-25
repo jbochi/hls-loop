@@ -7,7 +7,7 @@ from decimal import Decimal
 
 SEGMENTS_IN_PLAYLIST = 10
 
-from flask import Flask, Response
+from flask import Flask, Response, make_response
 app = Flask(__name__)
 
 def read_file_durations():
@@ -32,7 +32,7 @@ playlist2.m3u8
 playlist3.m3u8
 #EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=1927833,CODECS="mp4a.40.2, avc1.4d401f"
 playlist4.m3u8
-""", mimetype="application/vnd.apple.mpegurl")
+""", mimetype="application/x-mpegURL", headers={'Access-Control-Allow-Origin': '*'})
 
 @app.route("/playlist<int:id>.m3u8")
 def playlist(id):
@@ -64,7 +64,7 @@ def playlist(id):
 #EXT-X-VERSION:3
 #EXT-X-MEDIA-SEQUENCE:{media_sequence}
 {segments_txt}""".format(media_sequence = media_sequence + sequence_in_loop, segments_txt=segments_txt),
-    mimetype="application/vnd.apple.mpegurl")
+    mimetype="application/x-mpegURL", headers={'Access-Control-Allow-Origin': '*'})
 
 @app.route("/crossdomain.xml")
 def crossdomain():
@@ -73,6 +73,15 @@ def crossdomain():
 <allow-access-from domain="*" secure="false"/>
 <allow-http-request-headers-from domain="*" headers="*" secure="false"/>
 </cross-domain-policy>""", mimetype="text/xml")
+
+@app.route("/static/bipbop_4x3/gear<int:id>/<string:filename>")
+def segment(id, filename):
+    with open('./static/bipbop_4x3/gear%d/%s' % (id, filename), 'rb') as f:
+        binary = f.read()
+    response = make_response(binary)
+    response.headers.set('Content-Type', 'video/MP2T')
+    response.headers.set('Access-Control-Allow-Origin', '*')
+    return response
 
 if __name__ == "__main__":
     #app.debug = True
